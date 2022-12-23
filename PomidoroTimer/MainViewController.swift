@@ -84,43 +84,32 @@ final class MainViewController: UIViewController {
         
         playerStackView.addArrangedSubview(playTimerButton)
         playerStackView.addArrangedSubview(pauseTimerButton)
-        
-        playTimerButton.snp.makeConstraints { make in
-            make.width.height.equalTo(Constants.Size.buttonSize)
-        }
-        
-        pauseTimerButton.snp.makeConstraints { make in
-            make.width.height.equalTo(Constants.Size.buttonSize)
-        }
     }
     
     // MARK: - Actions
     
-    @objc func playTimer(_ sender: UIButton) {
-        createTimer()
+    @objc private func playTimer() {
+        setupTimer()
         isTimerStarted = true
-        sender.isEnabled = !isTimerStarted
     }
     
-    @objc func pauseTimer(_ sender: UIButton) {
+    @objc private func pauseTimer() {
         isTimerStarted = false
         timer?.invalidate()
         timer = nil
     }
-
+    
     // MARK: - Private funcs
     
-    func createTimer() {
-        if timer == nil {
-            timer = Timer.scheduledTimer(timeInterval: 1.0,
-                                         target: self,
-                                         selector: #selector(updateTimer),
-                                         userInfo: nil,
-                                         repeats: true)
-        }
+    private func setupTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                     target: self,
+                                     selector: #selector(updateTimer),
+                                     userInfo: nil,
+                                     repeats: true)
     }
     
-    @objc func updateTimer() {
+    @objc private func updateTimer() {
         clockTime += 1
         setupLabelText(withTime: clockTime)
     }
