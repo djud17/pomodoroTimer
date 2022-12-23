@@ -11,7 +11,11 @@ enum Constants {
     enum Color {
         static let red = UIColor(red: 0.61, green: 0.11, blue: 0.09, alpha: 1)
         static let green = UIColor(red: 0, green: 0.57, blue: 0.14, alpha: 1)
+        
         static let white = UIColor.white
+        static let alphaWhite = UIColor.white.withAlphaComponent(0.5)
+        
+        static let clear = UIColor.clear.cgColor
     }
     
     enum Offset {
@@ -43,7 +47,7 @@ enum Constants {
     }
     
     enum Time {
-        static let workDuration: UInt = 5 // 25
-        static let restDuration: UInt = 3 // 10
+        static let workDuration: UInt = 25
+        static let restDuration: UInt = 10
     }
 }
