@@ -14,6 +14,7 @@
 		25B7BDA22955A2C700E8EF97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B7BDA02955A2C700E8EF97 /* LaunchScreen.storyboard */; };
 		25B7BDAE2955B58600E8EF97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B7BDAD2955B58600E8EF97 /* Constants.swift */; };
 		25B7BDB12955BB0200E8EF97 /* PlayerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B7BDB02955BB0200E8EF97 /* PlayerButton.swift */; };
+		25B7BDB32955C04100E8EF97 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B7BDB22955C04100E8EF97 /* MainView.swift */; };
 		8D131894B847861BB0D0ADD3 /* Pods_PomidoroTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE6418F3A887581F40DFF14 /* Pods_PomidoroTimer.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		25B7BDA32955A2C700E8EF97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25B7BDAD2955B58600E8EF97 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		25B7BDB02955BB0200E8EF97 /* PlayerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButton.swift; sourceTree = "<group>"; };
+		25B7BDB22955C04100E8EF97 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4EE6418F3A887581F40DFF14 /* Pods_PomidoroTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PomidoroTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A3FD8FEB80DE13648001567 /* Pods-PomidoroTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomidoroTimer.release.xcconfig"; path = "Target Support Files/Pods-PomidoroTimer/Pods-PomidoroTimer.release.xcconfig"; sourceTree = "<group>"; };
 		B37C0B7CAB0BA6B40CA1556A /* Pods-PomidoroTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomidoroTimer.debug.xcconfig"; path = "Target Support Files/Pods-PomidoroTimer/Pods-PomidoroTimer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				25B7BDB02955BB0200E8EF97 /* PlayerButton.swift */,
+				25B7BDB22955C04100E8EF97 /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25B7BD9A2955A2C600E8EF97 /* MainViewController.swift in Sources */,
+				25B7BDB32955C04100E8EF97 /* MainView.swift in Sources */,
 				25B7BD962955A2C600E8EF97 /* AppDelegate.swift in Sources */,
 				25B7BD982955A2C600E8EF97 /* SceneDelegate.swift in Sources */,
 				25B7BDAE2955B58600E8EF97 /* Constants.swift in Sources */,
