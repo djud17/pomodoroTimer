@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 final class MainViewController: UIViewController {
+    private let mainView = MainView()
     private var timer: Timer?
     private var clockTime: UInt = 0
     private var isTimerStarted = false {
@@ -20,71 +21,27 @@ final class MainViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    private let secondsLabel: UILabel = {
-        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: Constants.FontSize.largeSize)
-        label.textColor = Constants.Color.white
-        return label
-    }()
+    private lazy var secondsLabel = mainView.secondsLabel
     
-    private let playerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .center
-        stackView.spacing = 10
-        stackView.layer.cornerRadius = 20
-        stackView.layer.borderColor = Constants.Color.white.cgColor
-        stackView.layer.borderWidth = 5
-        
-        return stackView
-    }()
+    private lazy var playerStackView = mainView.playerStackView
+    private lazy var playTimerButton = mainView.playTimerButton
+    private lazy var pauseTimerButton = mainView.pauseTimerButton
     
-    private let playTimerButton = PlayerButton(playerButtonType: .play)
-    private let pauseTimerButton = PlayerButton(playerButtonType: .pause)
+    // MARK: - VC Lifecycle
+    
+    override func loadView() {
+        view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupView()
-        setupHierachy()
-        setupPlayer()
-        setupLayout()
+        setupLabelText(withTime: clockTime)
+        playTimerButton.addTarget(self, action: #selector(playTimer), for: .touchUpInside)
+        pauseTimerButton.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
     }
     
     // MARK: - Setups
-    
-    private func setupView() {
-        view.backgroundColor = Constants.Color.red
-        
-        setupLabelText(withTime: clockTime)
-    }
-    
-    private func setupHierachy() {
-        view.addSubview(secondsLabel)
-        view.addSubview(playerStackView)
-    }
-    
-    private func setupLayout() {
-        secondsLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-        
-        playerStackView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(secondsLabel.snp.bottom).offset(Constants.Offset.mediumOffset)
-            make.width.equalTo(200)
-            make.height.equalTo(60)
-        }
-    }
-    
-    private func setupPlayer() {
-        playTimerButton.addTarget(self, action: #selector(playTimer), for: .touchUpInside)
-        pauseTimerButton.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
-        
-        playerStackView.addArrangedSubview(playTimerButton)
-        playerStackView.addArrangedSubview(pauseTimerButton)
-    }
     
     // MARK: - Actions
     
