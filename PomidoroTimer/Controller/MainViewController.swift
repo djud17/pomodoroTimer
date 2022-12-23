@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum Mode {
+    case work
+    case rest
+}
+
 final class MainViewController: UIViewController {
     private let mainView = MainView()
     private var timer: Timer?
@@ -19,6 +24,11 @@ final class MainViewController: UIViewController {
         didSet {
             playTimerButton.isEnabled = !isTimerStarted
             pauseTimerButton.isEnabled = isTimerStarted
+        }
+    }
+    private var currentMode: Mode = .work {
+        didSet {
+            mainView.viewMode = currentMode
         }
     }
     
@@ -99,5 +109,31 @@ final class MainViewController: UIViewController {
     
     @objc private func updateTimer() {
         clockTime += 1
+        
+        checkTimer()
+    }
+    
+    private func checkTimer() {
+        let maxDuration: UInt
+        switch currentMode {
+        case .work:
+            maxDuration = Constants.Time.workDuration
+        case .rest:
+            maxDuration = Constants.Time.restDuration
+        }
+        
+        if clockTime == maxDuration {
+            changeMode()
+            clockTime = 0
+        }
+    }
+    
+    private func changeMode() {
+        switch currentMode {
+        case .work:
+            currentMode = .rest
+        case .rest:
+            currentMode = .work
+        }
     }
 }

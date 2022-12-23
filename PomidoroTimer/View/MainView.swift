@@ -9,6 +9,14 @@ import UIKit
 import SnapKit
 
 final class MainView: UIView {
+    var viewMode: Mode = .work {
+        didSet {
+            selectMode()
+        }
+    }
+    
+    // MARK: - UI Elements
+    
     let secondsLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: Constants.FontSize.largeSize)
@@ -33,10 +41,12 @@ final class MainView: UIView {
     let pauseTimerButton = PlayerButton(playerButtonType: .pause)
     let stopTimerButton = PlayerButton(playerButtonType: .stop)
     
+    // MARK: - Inits
+    
     init() {
         super.init(frame: .zero)
         
-        setupView()
+        selectMode()
         setupHierachy()
         setupLayout()
         setupPlayer()
@@ -46,9 +56,19 @@ final class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
-        backgroundColor = Constants.Color.red
+    // MARK: - Setups
+    
+    private func selectMode() {
+        let selectedColor: UIColor
+        switch viewMode {
+        case .work:
+            selectedColor = Constants.Color.red
+        case .rest:
+            selectedColor = Constants.Color.green
+            print("reeest")
+        }
         
+        backgroundColor = selectedColor
     }
     
     private func setupHierachy() {
