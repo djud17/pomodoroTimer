@@ -11,7 +11,11 @@ import SnapKit
 final class MainViewController: UIViewController {
     private let mainView = MainView()
     private var timer: Timer?
-    private var clockTime: UInt = 0
+    private var clockTime: UInt = 0 {
+        didSet {
+            setupLabelText(withTime: clockTime)
+        }
+    }
     private var isTimerStarted = false {
         didSet {
             playTimerButton.isEnabled = !isTimerStarted
@@ -24,8 +28,10 @@ final class MainViewController: UIViewController {
     private lazy var secondsLabel = mainView.secondsLabel
     
     private lazy var playerStackView = mainView.playerStackView
+    
     private lazy var playTimerButton = mainView.playTimerButton
     private lazy var pauseTimerButton = mainView.pauseTimerButton
+    private lazy var stopTimerButton = mainView.stopTimerButton
     
     // MARK: - VC Lifecycle
     
@@ -37,23 +43,29 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         
         setupLabelText(withTime: clockTime)
-        playTimerButton.addTarget(self, action: #selector(playTimer), for: .touchUpInside)
-        pauseTimerButton.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
+        playTimerButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+        pauseTimerButton.addTarget(self, action: #selector(pauseButtonTapped), for: .touchUpInside)
+        stopTimerButton.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - Setups
     
     // MARK: - Actions
     
-    @objc private func playTimer() {
+    @objc private func playButtonTapped() {
         setupTimer()
         isTimerStarted = true
+        stopTimerButton.isEnabled = true
     }
     
-    @objc private func pauseTimer() {
-        isTimerStarted = false
-        timer?.invalidate()
-        timer = nil
+    @objc private func pauseButtonTapped() {
+        stopTimer()
+    }
+    
+    @objc private func stopButtonTapped() {
+        clockTime = 0
+        stopTimer()
+        stopTimerButton.isEnabled = false
     }
     
     // MARK: - Private funcs
@@ -66,9 +78,14 @@ final class MainViewController: UIViewController {
                                      repeats: true)
     }
     
+    private func stopTimer() {
+        isTimerStarted = false
+        timer?.invalidate()
+        timer = nil
+    }
+    
     @objc private func updateTimer() {
         clockTime += 1
-        setupLabelText(withTime: clockTime)
     }
     
     private func setupLabelText(withTime time: UInt) {

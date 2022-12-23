@@ -31,5 +31,8 @@ enum Constants {
         
         static let pauseImage = UIImage(systemName: "pause")
         static let pauseFillImage = UIImage(systemName: "pause.fill")
+        
+        static let stopImage = UIImage(systemName: "stop")
+        static let stopFillImage = UIImage(systemName: "stop.fill")
     }
 }

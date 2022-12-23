@@ -31,6 +31,7 @@ final class MainView: UIView {
     
     let playTimerButton = PlayerButton(playerButtonType: .play)
     let pauseTimerButton = PlayerButton(playerButtonType: .pause)
+    let stopTimerButton = PlayerButton(playerButtonType: .stop)
     
     init() {
         super.init(frame: .zero)
@@ -71,5 +72,6 @@ final class MainView: UIView {
     private func setupPlayer() {
         playerStackView.addArrangedSubview(playTimerButton)
         playerStackView.addArrangedSubview(pauseTimerButton)
+        playerStackView.addArrangedSubview(stopTimerButton)
     }
 }
