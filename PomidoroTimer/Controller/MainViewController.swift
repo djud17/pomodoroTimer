@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 final class MainViewController: UIViewController {
     private let mainView = MainView()
@@ -43,12 +42,26 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         
         setupLabelText(withTime: clockTime)
+        setupButtonsTargets()
+    }
+    
+    // MARK: - Setups
+    
+    private func setupLabelText(withTime time: UInt) {
+        let textTime: String
+        if time < 10 {
+            textTime = "0\(time)"
+        } else {
+            textTime = "\(time)"
+        }
+        secondsLabel.text = textTime
+    }
+    
+    private func setupButtonsTargets() {
         playTimerButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         pauseTimerButton.addTarget(self, action: #selector(pauseButtonTapped), for: .touchUpInside)
         stopTimerButton.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
     }
-    
-    // MARK: - Setups
     
     // MARK: - Actions
     
@@ -68,7 +81,7 @@ final class MainViewController: UIViewController {
         stopTimerButton.isEnabled = false
     }
     
-    // MARK: - Private funcs
+    // MARK: - Timer funcs
     
     private func setupTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0,
@@ -86,15 +99,5 @@ final class MainViewController: UIViewController {
     
     @objc private func updateTimer() {
         clockTime += 1
-    }
-    
-    private func setupLabelText(withTime time: UInt) {
-        let textTime: String
-        if time < 10 {
-            textTime = "0\(time)"
-        } else {
-            textTime = "\(time)"
-        }
-        secondsLabel.text = textTime
     }
 }
