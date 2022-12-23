@@ -15,15 +15,20 @@ enum Constants {
     }
     
     enum Offset {
+        static let topOffset: CGFloat = 60
         static let mediumOffset: CGFloat = 20
     }
     
     enum FontSize {
-        static let largeSize: CGFloat = 80
+        static let mediumSize: CGFloat = 40
+        static let largeSize: CGFloat = 100
     }
     
     enum Size {
         static let buttonSize: CGFloat = 40
+        
+        static let stackWidth: CGFloat = 200
+        static let stackHeight: CGFloat = 60
     }
     
     enum Image {
