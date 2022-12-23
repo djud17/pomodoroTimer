@@ -29,8 +29,21 @@ final class MainViewController: UIViewController {
     private var currentMode: Mode = .work {
         didSet {
             mainView.viewMode = currentMode
+            
+            switch currentMode {
+            case .work:
+                currentMaxTimerDuration = Constants.Time.workDuration
+            case .rest:
+                currentMaxTimerDuration = Constants.Time.restDuration
+            }
         }
     }
+    private var currentMaxTimerDuration: UInt = Constants.Time.workDuration {
+        didSet {
+            currentTimerStep = Double(1) / Double(currentMaxTimerDuration)
+        }
+    }
+    private var currentTimerStep: CGFloat = 1.0 / Double(Constants.Time.workDuration)
     
     // MARK: - UI Elements
     
@@ -89,6 +102,7 @@ final class MainViewController: UIViewController {
         clockTime = 0
         stopTimer()
         stopTimerButton.isEnabled = false
+        mainView.resetProgress()
     }
     
     // MARK: - Timer funcs
@@ -110,23 +124,19 @@ final class MainViewController: UIViewController {
     @objc private func updateTimer() {
         clockTime += 1
         
+        progressStep()
         checkTimer()
     }
     
     private func checkTimer() {
-        let maxDuration: UInt
-        switch currentMode {
-        case .work:
-            maxDuration = Constants.Time.workDuration
-        case .rest:
-            maxDuration = Constants.Time.restDuration
-        }
-        
-        if clockTime == maxDuration {
+        if clockTime > currentMaxTimerDuration {
             changeMode()
             clockTime = 0
+            mainView.resetProgress()
         }
     }
+    
+    // MARK: - Private funcs
     
     private func changeMode() {
         switch currentMode {
@@ -135,5 +145,9 @@ final class MainViewController: UIViewController {
         case .rest:
             currentMode = .work
         }
+    }
+    
+    private func progressStep() {
+        mainView.progressStep(withStep: currentTimerStep)
     }
 }

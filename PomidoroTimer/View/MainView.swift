@@ -45,6 +45,8 @@ final class MainView: UIView {
         return stackView
     }()
     
+    var circularProgressBarView = CircleProgressBar(frame: .zero)
+    
     let playTimerButton = PlayerButton(playerButtonType: .play)
     let pauseTimerButton = PlayerButton(playerButtonType: .pause)
     let stopTimerButton = PlayerButton(playerButtonType: .stop)
@@ -74,7 +76,6 @@ final class MainView: UIView {
             selectedColor = Constants.Color.red
         case .rest:
             selectedColor = Constants.Color.green
-            print("reeest")
         }
         
         backgroundColor = selectedColor
@@ -83,6 +84,7 @@ final class MainView: UIView {
     private func setupHierachy() {
         addSubview(modeLabel)
         addSubview(secondsLabel)
+        addSubview(circularProgressBarView)
         addSubview(playerStackView)
     }
     
@@ -96,9 +98,13 @@ final class MainView: UIView {
             make.center.equalToSuperview()
         }
         
+        circularProgressBarView.snp.makeConstraints { make in
+            make.center.equalTo(secondsLabel.snp.center)
+        }
+        
         playerStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(secondsLabel.snp.bottom).offset(Constants.Offset.mediumOffset)
+            make.top.equalTo(secondsLabel.snp.bottom).offset(100)
             make.width.equalTo(Constants.Size.stackWidth)
             make.height.equalTo(Constants.Size.stackHeight)
         }
@@ -119,5 +125,13 @@ final class MainView: UIView {
             labelText = "Let`s have a rest!"
         }
         modeLabel.text = labelText
+    }
+    
+    func progressStep(withStep step: CGFloat) {
+        circularProgressBarView.progress(value: step)
+    }
+    
+    func resetProgress() {
+        circularProgressBarView.resetBar()
     }
 }
