@@ -10,6 +10,7 @@ import UIKit
 enum PlayerButtonType {
     case play
     case pause
+    case stop
 }
 
 final class PlayerButton: UIButton {
@@ -40,6 +41,10 @@ final class PlayerButton: UIButton {
         case .pause:
             normalImage = Constants.Image.pauseImage
             highlightedImage = Constants.Image.pauseFillImage
+            isEnabled = false
+        case .stop:
+            normalImage = Constants.Image.stopImage
+            highlightedImage = Constants.Image.stopFillImage
             isEnabled = false
         }
         
