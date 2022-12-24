@@ -15,7 +15,7 @@ enum Mode {
 final class MainViewController: UIViewController {
     private let mainView = MainView()
     private var timer: Timer?
-    private var clockTime: UInt = 0 {
+    private var clockTime: (minutes: UInt, seconds: UInt) = (0, 0) {
         didSet {
             setupLabelText(withTime: clockTime)
         }
@@ -48,6 +48,7 @@ final class MainViewController: UIViewController {
     // MARK: - UI Elements
     
     private lazy var secondsLabel = mainView.secondsLabel
+    private lazy var minutesLabel = mainView.minutesLabel
     
     private lazy var playerStackView = mainView.playerStackView
     
@@ -64,20 +65,29 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLabelText(withTime: clockTime)
+        setupInitial()
         setupButtonsTargets()
     }
     
     // MARK: - Setups
     
-    private func setupLabelText(withTime time: UInt) {
-        let textTime: String
-        if time < 10 {
-            textTime = "0\(time)"
-        } else {
-            textTime = "\(time)"
-        }
-        secondsLabel.text = textTime
+    private func setupLabelText(withTime time: (UInt, UInt)) {
+        let (minutes, seconds) = time
+        
+        let textMinutes = minutes < 10 ? "0\(minutes)" : "\(minutes)"
+        let textSeconds = seconds < 10 ? "0\(seconds)" : "\(seconds)"
+
+        minutesLabel.text = textMinutes
+        secondsLabel.text = textSeconds
+    }
+    
+    private func setupInitial() {
+        // Uncomment to test
+        // clockTime = (24, 30)
+        
+        let currentProgress = CGFloat(clockTime.minutes) * currentTimerStep
+        progressStep(withStep: currentProgress)
+        setupLabelText(withTime: clockTime)
     }
     
     private func setupButtonsTargets() {
@@ -99,7 +109,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc private func stopButtonTapped() {
-        clockTime = 0
+        clockTime = (0, 0)
         stopTimer()
         stopTimerButton.isEnabled = false
         mainView.resetProgress()
@@ -122,21 +132,29 @@ final class MainViewController: UIViewController {
     }
     
     @objc private func updateTimer() {
-        clockTime += 1
+        clockTime.seconds += 1
         
-        progressStep()
-        checkTimer()
+        checkTime()
+        checkDuration()
     }
     
-    private func checkTimer() {
-        if clockTime > currentMaxTimerDuration {
+    private func checkTime() {
+        if clockTime.seconds >= 60 {
+            progressStep(withStep: currentTimerStep)
+            clockTime.minutes += 1
+            clockTime.seconds = 0
+        }
+    }
+    
+    private func checkDuration() {
+        if clockTime.minutes >= currentMaxTimerDuration {
             changeMode()
-            clockTime = 0
+            clockTime = (0, 0)
             mainView.resetProgress()
         }
     }
     
-    // MARK: - Private funcs
+    // MARK: - Helper funcs
     
     private func changeMode() {
         switch currentMode {
@@ -147,7 +165,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func progressStep() {
-        mainView.progressStep(withStep: currentTimerStep)
+    private func progressStep(withStep step: CGFloat) {
+        mainView.progressStep(withStep: step)
     }
 }

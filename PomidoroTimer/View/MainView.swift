@@ -25,10 +25,11 @@ final class MainView: UIView {
         return label
     }()
     
-    let secondsLabel: UILabel = {
-        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: Constants.FontSize.largeSize)
-        label.textColor = Constants.Color.white
+    let minutesLabel = TimeLabel()
+    let secondsLabel = TimeLabel()
+    private let separatorLabel: UILabel = {
+        let label = TimeLabel()
+        label.text = ":"
         return label
     }()
     
@@ -56,10 +57,12 @@ final class MainView: UIView {
     init() {
         super.init(frame: .zero)
         
-        selectMode()
-        updateModeLabelText()
         setupHierachy()
         setupLayout()
+        
+        selectMode()
+        updateModeLabelText()
+        
         setupPlayer()
     }
     
@@ -83,6 +86,8 @@ final class MainView: UIView {
     
     private func setupHierachy() {
         addSubview(modeLabel)
+        addSubview(minutesLabel)
+        addSubview(separatorLabel)
         addSubview(secondsLabel)
         addSubview(circularProgressBarView)
         addSubview(playerStackView)
@@ -94,17 +99,29 @@ final class MainView: UIView {
             make.centerX.equalToSuperview()
         }
         
-        secondsLabel.snp.makeConstraints { make in
+        separatorLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
         circularProgressBarView.snp.makeConstraints { make in
-            make.center.equalTo(secondsLabel.snp.center)
+            make.center.equalTo(separatorLabel.snp.center)
+        }
+        
+        minutesLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(separatorLabel.snp.centerY)
+            make.trailing.equalTo(separatorLabel.snp.leading).offset(-10)
+            make.leading.equalToSuperview().offset(50)
+        }
+        
+        secondsLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(separatorLabel.snp.centerY)
+            make.leading.equalTo(separatorLabel.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().offset(-50)
         }
         
         playerStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(secondsLabel.snp.bottom).offset(100)
+            make.top.equalTo(minutesLabel.snp.bottom).offset(150)
             make.width.equalTo(Constants.Size.stackWidth)
             make.height.equalTo(Constants.Size.stackHeight)
         }

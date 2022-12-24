@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		253F3D202955D327002B1530 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253F3D1F2955D327002B1530 /* CircleProgressBar.swift */; };
+		2560346729573C6A00B80F5A /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2560346629573C6A00B80F5A /* TimeLabel.swift */; };
 		25B7BD962955A2C600E8EF97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B7BD952955A2C600E8EF97 /* AppDelegate.swift */; };
 		25B7BD982955A2C600E8EF97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B7BD972955A2C600E8EF97 /* SceneDelegate.swift */; };
 		25B7BD9A2955A2C600E8EF97 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B7BD992955A2C600E8EF97 /* MainViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		253F3D1F2955D327002B1530 /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
+		2560346629573C6A00B80F5A /* TimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		25B7BD922955A2C600E8EF97 /* PomidoroTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomidoroTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25B7BD952955A2C600E8EF97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25B7BD972955A2C600E8EF97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,8 +75,6 @@
 				25B7BDA92955A3C600E8EF97 /* Resourses */,
 				25B7BDAF2955BAEC00E8EF97 /* View */,
 				25B7BDB42955C56D00E8EF97 /* Controller */,
-				25B7BDA32955A2C700E8EF97 /* Info.plist */,
-				25B7BDAD2955B58600E8EF97 /* Constants.swift */,
 			);
 			path = PomidoroTimer;
 			sourceTree = "<group>";
@@ -92,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				25B7BDAB2955A3EF00E8EF97 /* App */,
+				25B7BDA32955A2C700E8EF97 /* Info.plist */,
+				25B7BDAD2955B58600E8EF97 /* Constants.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -111,6 +113,7 @@
 				25B7BDB02955BB0200E8EF97 /* PlayerButton.swift */,
 				25B7BDB22955C04100E8EF97 /* MainView.swift */,
 				253F3D1F2955D327002B1530 /* CircleProgressBar.swift */,
+				2560346629573C6A00B80F5A /* TimeLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25B7BD9A2955A2C600E8EF97 /* MainViewController.swift in Sources */,
+				2560346729573C6A00B80F5A /* TimeLabel.swift in Sources */,
 				25B7BDB32955C04100E8EF97 /* MainView.swift in Sources */,
 				253F3D202955D327002B1530 /* CircleProgressBar.swift in Sources */,
 				25B7BD962955A2C600E8EF97 /* AppDelegate.swift in Sources */,
@@ -421,7 +425,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F5BJS4MMJH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PomidoroTimer/Info.plist;
+				INFOPLIST_FILE = PomidoroTimer/Sources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -453,7 +457,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F5BJS4MMJH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PomidoroTimer/Info.plist;
+				INFOPLIST_FILE = PomidoroTimer/Sources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
