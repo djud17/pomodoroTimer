@@ -110,13 +110,11 @@ final class MainView: UIView {
         minutesLabel.snp.makeConstraints { make in
             make.centerY.equalTo(separatorLabel.snp.centerY)
             make.trailing.equalTo(separatorLabel.snp.leading).offset(-10)
-            make.leading.equalToSuperview().offset(50)
         }
         
         secondsLabel.snp.makeConstraints { make in
             make.centerY.equalTo(separatorLabel.snp.centerY)
             make.leading.equalTo(separatorLabel.snp.trailing).offset(10)
-            make.trailing.equalToSuperview().offset(-50)
         }
         
         playerStackView.snp.makeConstraints { make in
