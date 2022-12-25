@@ -40,10 +40,10 @@ final class MainViewController: UIViewController {
     }
     private var currentMaxTimerDuration: UInt = Constants.Time.workDuration {
         didSet {
-            currentTimerStep = Double(1) / Double(currentMaxTimerDuration)
+            currentTimerStep = 1.0 / (Double(Constants.Time.workDuration) * 60.0)
         }
     }
-    private var currentTimerStep: CGFloat = 1.0 / Double(Constants.Time.workDuration)
+    private var currentTimerStep: CGFloat = 1.0 / (Double(Constants.Time.workDuration) * 60.0)
     
     // MARK: - UI Elements
     
@@ -134,13 +134,13 @@ final class MainViewController: UIViewController {
     @objc private func updateTimer() {
         clockTime.seconds += 1
         
+        progressStep(withStep: currentTimerStep)
         checkTime()
         checkDuration()
     }
     
     private func checkTime() {
         if clockTime.seconds >= 60 {
-            progressStep(withStep: currentTimerStep)
             clockTime.minutes += 1
             clockTime.seconds = 0
         }
